@@ -2,12 +2,17 @@
 
 const inputs = [...document.querySelectorAll('form input')];
 
-inputs.forEach((input) => {
+inputs.forEach((input, index) => {
   const label = document.createElement('label');
 
   label.classList.add('field-label');
+
+  if (!input.id) {
+    input.id = `${input.name || 'field'}-${index}`;
+  }
+
   label.htmlFor = input.id;
-  label.textContent = input.name.toUpperCase();
+  label.textContent = capitalize(input.name);
 
   input.placeholder = capitalize(input.name);
   input.parentElement.insertBefore(label, input);
